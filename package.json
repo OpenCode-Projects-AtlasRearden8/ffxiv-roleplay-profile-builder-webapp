@@ -1,0 +1,22 @@
+{
+  "name": "ffxiv-roleplay-profile-builder-webapp",
+  "version": "1.0.0",
+  "description": "Static offline webapp for building Final Fantasy XIV roleplay character cards",
+  "type": "commonjs",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "keywords": [
+    "ffxiv",
+    "roleplay",
+    "character-sheet",
+    "offline",
+    "local-first"
+  ],
+  "author": "Asdale Dynamics, LLC",
+  "license": "MIT",
+  "devDependencies": {
+    "happy-dom": "^20.0.11"
+  }
+}

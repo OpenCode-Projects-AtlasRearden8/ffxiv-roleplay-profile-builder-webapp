@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adventurer's Ledger — FFXIV Roleplay Profile Builder</title>
+<meta name="description" content="Offline, local-only builder for Final Fantasy XIV roleplay character cards. No accounts, no tracking.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <h1 class="app-title">Adventurer's Ledger</h1>
+    <p class="app-subtitle">FFXIV roleplay profile builder</p>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <p id="save-status" class="save-status" role="status" aria-live="polite">Ready. Your card autosaves to this browser only.</p>
+
+  <section class="card toolbar-card" aria-labelledby="tools-heading">
+    <h2 id="tools-heading">Tools</h2>
+    <div class="toolbar">
+      <label class="inline-label" for="template-select">Start from a template</label>
+      <select id="template-select" name="template-select">
+        <option value="">Choose a template…</option>
+      </select>
+      <button type="button" id="btn-apply-template">Apply template</button>
+      <button type="button" id="btn-clear-card" class="btn-quiet">Clear card</button>
+    </div>
+    <div class="toolbar">
+      <button type="button" id="btn-show-json" class="btn-quiet">Preview JSON</button>
+      <button type="button" id="btn-download-json" class="btn-quiet">Download JSON</button>
+      <button type="button" id="btn-copy-json" class="btn-quiet">Copy JSON</button>
+    </div>
+    <details id="export-details" class="io-details">
+      <summary>Export / import</summary>
+      <label for="export-output">Exported card JSON (read-only)</label>
+      <textarea id="export-output" rows="10" readonly></textarea>
+      <hr>
+      <label for="import-input">Paste card JSON to import</label>
+      <textarea id="import-input" rows="6" placeholder='{"version":1,"bio":{"name":"…"}}'></textarea>
+      <button type="button" id="btn-import-json">Apply pasted JSON</button>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="bio-heading">
+    <h2 id="bio-heading">Character bio</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="bio-name">Name <span class="req" aria-hidden="true">·</span><span class="visually-hidden">(recommended)</span></label>
+        <input id="bio-name" name="bio-name" type="text" autocomplete="off" placeholder="e.g. Rowena Fairwind">
+      </div>
+      <div class="field">
+        <label for="bio-title">Epithet / title</label>
+        <input id="bio-title" name="bio-title" type="text" autocomplete="off" placeholder="e.g. The Lantern of La Noscea">
+      </div>
+      <div class="field">
+        <label for="bio-race">Race</label>
+        <input id="bio-race" name="bio-race" type="text" autocomplete="off" placeholder="e.g. Hyur, Miqo'te…">
+      </div>
+      <div class="field">
+        <label for="bio-clan">Clan</label>
+        <input id="bio-clan" name="bio-clan" type="text" autocomplete="off" placeholder="e.g. Midlander, Keeper of the Moon…">
+      </div>
+      <div class="field">
+        <label for="bio-age">Age</label>
+        <input id="bio-age" name="bio-age" type="text" autocomplete="off" placeholder="e.g. 27">
+      </div>
+      <div class="field">
+        <label for="bio-occupation">Occupation</label>
+        <input id="bio-occupation" name="bio-occupation" type="text" autocomplete="off" placeholder="e.g. Free Company quartermaster">
+      </div>
+      <div class="field">
+        <label for="bio-birthplace">Birthplace</label>
+        <input id="bio-birthplace" name="bio-birthplace" type="text" autocomplete="off" placeholder="e.g. a fishing village near Limsa Lominsa">
+      </div>
+      <div class="field">
+        <label for="bio-pronouns">Pronouns</label>
+        <input id="bio-pronouns" name="bio-pronouns" type="text" autocomplete="off" placeholder="e.g. she/her">
+      </div>
+    </div>
+    <div class="field">
+      <label for="bio-summary">Brief bio</label>
+      <textarea id="bio-summary" name="bio-summary" rows="5" placeholder="A short, no-spoilers introduction anyone can read…"></textarea>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="appearance-heading">
+    <h2 id="appearance-heading">Appearance</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="app-height">Height</label>
+        <input id="app-height" name="app-height" type="text" autocomplete="off" placeholder="e.g. 5 fulms, 8 ilms">
+      </div>
+      <div class="field">
+        <label for="app-build">Build</label>
+        <input id="app-build" name="app-build" type="text" autocomplete="off" placeholder="e.g. wiry, farm-strong">
+      </div>
+      <div class="field">
+        <label for="app-hair">Hair</label>
+        <input id="app-hair" name="app-hair" type="text" autocomplete="off" placeholder="e.g. copper braid">
+      </div>
+      <div class="field">
+        <label for="app-eyes">Eyes</label>
+        <input id="app-eyes" name="app-eyes" type="text" autocomplete="off" placeholder="e.g. sea-grey">
+      </div>
+      <div class="field">
+        <label for="app-notable">Notable features</label>
+        <input id="app-notable" name="app-notable" type="text" autocomplete="off" placeholder="e.g. scar across the left eyebrow">
+      </div>
+      <div class="field">
+        <label for="app-style">Common dress</label>
+        <input id="app-style" name="app-style" type="text" autocomplete="off" placeholder="e.g. patched travelling coat">
+      </div>
+    </div>
+    <div class="field">
+      <label for="app-notes">Appearance notes</label>
+      <textarea id="app-notes" name="app-notes" rows="3" placeholder="Anything a stranger would notice at a glance…"></textarea>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="personality-heading">
+    <h2 id="personality-heading">Personality sliders</h2>
+    <p class="hint">Slide toward the left word or the right word. Neutral is the middle. Values export with your card.</p>
+    <div id="trait-list" class="trait-list">
+      <div class="trait">
+        <label for="trait-warmth">Warmth</label>
+        <div class="trait-ends"><span aria-hidden="true">Aloof</span><span aria-hidden="true">Warm</span></div>
+        <input id="trait-warmth" name="trait-warmth" data-trait="warmth" type="range" min="0" max="100" step="1" value="50" aria-describedby="out-warmth">
+        <output id="out-warmth" for="trait-warmth">50 – neutral</output>
+      </div>
+      <div class="trait">
+        <label for="trait-confidence">Confidence</label>
+        <div class="trait-ends"><span aria-hidden="true">Timid</span><span aria-hidden="true">Bold</span></div>
+        <input id="trait-confidence" name="trait-confidence" data-trait="confidence" type="range" min="0" max="100" step="1" value="50" aria-describedby="out-confidence">
+        <output id="out-confidence" for="trait-confidence">50 – neutral</output>
+      </div>
+      <div class="trait">
+        <label for="trait-temper">Temper</label>
+        <div class="trait-ends"><span aria-hidden="true">Mellow</span><span aria-hidden="true">Fiery</span></div>
+        <input id="trait-temper" name="trait-temper" data-trait="temper" type="range" min="0" max="100" step="1" value="50" aria-describedby="out-temper">
+        <output id="out-temper" for="trait-temper">50 – neutral</output>
+      </div>
+      <div class="trait">
+        <label for="trait-honesty">Honesty</label>
+        <div class="trait-ends"><span aria-hidden="true">Sly</span><span aria-hidden="true">Forthright</span></div>
+        <input id="trait-honesty" name="trait-honesty" data-trait="honesty" type="range" min="0" max="100" step="1" value="50" aria-describedby="out-honesty">
+        <output id="out-honesty" for="trait-honesty">50 – neutral</output>
+      </div>
+      <div class="trait">
+        <label for="trait-humor">Humor</label>
+        <div class="trait-ends"><span aria-hidden="true">Deadpan</span><span aria-hidden="true">Playful</span></div>
+        <input id="trait-humor" name="trait-humor" data-trait="humor" type="range" min="0" max="100" step="1" value="50" aria-describedby="out-humor">
+        <output id="out-humor" for="trait-humor">50 – neutral</output>
+      </div>
+      <div class="trait">
+        <label for="trait-discipline">Discipline</label>
+        <div class="trait-ends"><span aria-hidden="true">Chaotic</span><span aria-hidden="true">Disciplined</span></div>
+        <input id="trait-discipline" name="trait-discipline" data-trait="discipline" type="range" min="0" max="100" step="1" value="50" aria-describedby="out-discipline">
+        <output id="out-discipline" for="trait-discipline">50 – neutral</output>
+      </div>
+      <div class="trait">
+        <label for="trait-sociability">Sociability</label>
+        <div class="trait-ends"><span aria-hidden="true">Quiet</span><span aria-hidden="true">Chatty</span></div>
+        <input id="trait-sociability" name="trait-sociability" data-trait="sociability" type="range" min="0" max="100" step="1" value="50" aria-describedby="out-sociability">
+        <output id="out-sociability" for="trait-sociability">50 – neutral</output>
+      </div>
+      <div class="trait">
+        <label for="trait-faith">Faith</label>
+        <div class="trait-ends"><span aria-hidden="true">Skeptical</span><span aria-hidden="true">Devout</span></div>
+        <input id="trait-faith" name="trait-faith" data-trait="faith" type="range" min="0" max="100" step="1" value="50" aria-describedby="out-faith">
+        <output id="out-faith" for="trait-faith">50 – neutral</output>
+      </div>
+    </div>
+    <div class="field">
+      <label for="personality-notes">Personality notes</label>
+      <textarea id="personality-notes" name="personality-notes" rows="3" placeholder="Quirks, mannerisms, favorite sayings…"></textarea>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="hooks-heading">
+    <h2 id="hooks-heading">Story hooks</h2>
+    <p class="hint">Short prompts other players can act on — e.g. “owes a debt to a shady broker in Ul'dah”. Keep these spoiler-free unless the card ships with spoilers opted in.</p>
+    <div id="hooks-list" class="hooks-list"></div>
+    <button type="button" id="btn-add-hook" class="btn-quiet">+ Add story hook</button>
+  </section>
+
+  <section class="card" aria-labelledby="fc-heading">
+    <h2 id="fc-heading">Free company &amp; links</h2>
+    <div class="field-grid">
+      <div class="field">
+        <label for="fc-name">Free company name</label>
+        <input id="fc-name" name="fc-name" type="text" autocomplete="off" placeholder="e.g. The Gilded Compass">
+      </div>
+      <div class="field">
+        <label for="fc-tag">Free company tag</label>
+        <input id="fc-tag" name="fc-tag" type="text" autocomplete="off" maxlength="8" placeholder="e.g. GLDS">
+      </div>
+      <div class="field">
+        <label for="fc-rank">Rank / title</label>
+        <input id="fc-rank" name="fc-rank" type="text" autocomplete="off" placeholder="e.g. Quartermaster">
+      </div>
+      <div class="field">
+        <label for="fc-homeworld">Homeworld / data center</label>
+        <input id="fc-homeworld" name="fc-homeworld" type="text" autocomplete="off" placeholder="e.g. familiar to friends only">
+      </div>
+    </div>
+    <div class="field">
+      <label for="fc-notes">Free company &amp; links notes</label>
+      <textarea id="fc-notes" name="fc-notes" rows="3" placeholder="Carrd, profile thread, or nothing at all — your call."></textarea>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Contact preferences</h2>
+    <fieldset class="toggle-group">
+      <legend>How may people approach this character?</legend>
+      <div class="toggle-row">
+        <input type="checkbox" id="contact-walkups" name="contact-walkups">
+        <label for="contact-walkups">In-character walk-ups from strangers welcome</label>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="contact-tells" name="contact-tells">
+        <label for="contact-tells">Whispers / tells allowed</label>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="contact-mail" name="contact-mail">
+        <label for="contact-mail">In-game mail okay</label>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="contact-party" name="contact-party">
+        <label for="contact-party">Open to surprise parties / events</label>
+      </div>
+    </fieldset>
+    <div class="field">
+      <label for="contact-notes">Contact notes</label>
+      <textarea id="contact-notes" name="contact-notes" rows="3" placeholder="e.g. ‘IC walk-ups always fine; tell first if it is a big plot.’"></textarea>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="spoilers-heading">
+    <h2 id="spoilers-heading">Spoilers (private by default)</h2>
+    <p class="hint">Everything below is <strong>excluded</strong> from your card and exports until you opt in. Nothing spoiler-adjacent leaves this page by accident.</p>
+    <div class="toggle-row master-toggle">
+      <input type="checkbox" id="spoilers-enabled" name="spoilers-enabled" aria-describedby="spoilers-hint">
+      <label for="spoilers-enabled">Include spoilers in this card</label>
+    </div>
+    <p id="spoilers-hint" class="visually-hidden">When checked, spoiler sections below become editable and are only exported for the sections you individually opt in.</p>
+    <div id="spoiler-sections" hidden>
+      <div class="spoiler-block" data-spoiler="backstory">
+        <div class="toggle-row">
+          <input type="checkbox" id="spoiler-backstory-enabled" name="spoiler-backstory-enabled">
+          <label for="spoiler-backstory-enabled">Out: backstory secrets</label>
+        </div>
+        <div class="field">
+          <label for="spoiler-backstory">Backstory secrets</label>
+          <textarea id="spoiler-backstory" name="spoiler-backstory" rows="3" placeholder="The truth behind that rumor…"></textarea>
+        </div>
+      </div>
+      <div class="spoiler-block" data-spoiler="revealed">
+        <div class="toggle-row">
+          <input type="checkbox" id="spoiler-revealed-enabled" name="spoiler-revealed-enabled">
+          <label for="spoiler-revealed-enabled">Out: revealed-in-RP facts</label>
+        </div>
+        <div class="field">
+          <label for="spoiler-revealed">Revealed-in-RP facts</label>
+          <textarea id="spoiler-revealed" name="spoiler-revealed" rows="3" placeholder="Only known to characters who earned it story-wise…"></textarea>
+        </div>
+      </div>
+      <div class="spoiler-block" data-spoiler="future">
+        <div class="toggle-row">
+          <input type="checkbox" id="spoiler-future-enabled" name="spoiler-future-enabled">
+          <label for="spoiler-future-enabled">Out: future plans</label>
+        </div>
+        <div class="field">
+          <label for="spoiler-future">Future story plans</label>
+          <textarea id="spoiler-future" name="spoiler-future" rows="3" placeholder="Where you want this arc to go…"></textarea>
+        </div>
+      </div>
+      <div class="spoiler-block" data-spoiler="sensitive">
+        <div class="toggle-row">
+          <input type="checkbox" id="spoiler-sensitive-enabled" name="spoiler-sensitive-enabled">
+          <label for="spoiler-sensitive-enabled">Out: sensitive topics</label>
+        </div>
+        <div class="field">
+          <label for="spoiler-sensitive">Sensitive topics &amp; boundaries</label>
+          <textarea id="spoiler-sensitive" name="spoiler-sensitive" rows="3" placeholder="Themes to ask about first, hard limits, content notes…"></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="policy-heading">
+    <h2 id="policy-heading">Fan content notice</h2>
+    <p>Adventurer's Ledger is an unofficial fan tool made for the Final Fantasy XIV roleplay community. It is not affiliated with, endorsed by, sponsored by, or approved by Square Enix.</p>
+    <p>FINAL FANTASY and FINAL FANTASY XIV are trademarks or registered trademarks of Square Enix Holdings Co., Ltd. The game is governed by Square Enix's Fan Content Policy and Material Usage Guidelines; please review them before sharing fan works. Character names, free companies, and lore references in the bundled templates are entirely fictional and made up for this tool.</p>
+    <p>This tool stores everything in your browser's local storage, needs no login, collects nothing, and works fully offline.</p>
+  </section>
+
+  <footer class="site-footer">
+    <p>Built with care by <strong>Asdale Dynamics, LLC</strong> · MIT licensed · <a href="https://www.finalfantasyxiv.com/" rel="noopener noreferrer">FINAL FANTASY XIV official site</a></p>
+  </footer>
+</main>
+
+<script src="js/templates.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
